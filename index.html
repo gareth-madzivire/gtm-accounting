@@ -1190,6 +1190,19 @@
             font-size: 0.95rem;
             color: var(--ink);
         }
+        .contact-link {
+            color: var(--ink);
+            text-decoration: none;
+            background-image: linear-gradient(var(--teal), var(--teal));
+            background-size: 0% 1px;
+            background-position: 0 100%;
+            background-repeat: no-repeat;
+            transition: background-size 0.3s;
+        }
+        .contact-link:hover {
+            background-size: 100% 1px;
+            color: var(--teal);
+        }
         .contact-right {
             display: flex;
             flex-direction: column;
@@ -1226,6 +1239,69 @@
             background: var(--teal);
             border-radius: 50%;
             animation: pulse 2s ease-in-out infinite;
+        }
+
+        /* ── FLOATING CTA ICONS ── */
+        .floating-cta {
+            position: fixed;
+            bottom: 2.5rem;
+            right: 2.5rem;
+            z-index: 99;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            pointer-events: auto;
+        }
+        .cta-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--teal);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(26, 107, 90, 0.35);
+            transition: transform 0.3s, background 0.3s, box-shadow 0.3s;
+            position: relative;
+            text-decoration: none;
+        }
+        .cta-btn:hover {
+            transform: translateY(-4px) scale(1.05);
+            background: var(--teal-light);
+            box-shadow: 0 12px 32px rgba(26, 107, 90, 0.45);
+        }
+        .cta-btn svg {
+            width: 22px;
+            height: 22px;
+            fill: none;
+            stroke: white;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .cta-tooltip {
+            position: absolute;
+            right: 64px;
+            background: var(--ink);
+            color: var(--paper);
+            font-family: 'DM Mono', monospace;
+            font-size: 0.55rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 0.35rem 0.8rem;
+            border-radius: 4px;
+            white-space: nowrap;
+            opacity: 0;
+            transform: translateX(8px);
+            transition: opacity 0.3s, transform 0.3s;
+            pointer-events: none;
+        }
+        .cta-btn:hover .cta-tooltip {
+            opacity: 1;
+            transform: translateX(0);
         }
 
         /* ── FOOTER ── */
@@ -1355,6 +1431,22 @@
             html {
                 cursor: auto;
             }
+            .floating-cta {
+                bottom: 1.5rem;
+                right: 1.5rem;
+                gap: 0.8rem;
+            }
+            .cta-btn {
+                width: 44px;
+                height: 44px;
+            }
+            .back-to-top {
+                bottom: 7rem;
+                right: 1.5rem;
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
@@ -1378,6 +1470,33 @@
 
     <!-- BACK TO TOP -->
     <button class="back-to-top" id="back-to-top" aria-label="Back to top">↑</button>
+
+    <!-- FLOATING CTA BUTTONS (WhatsApp, Call, Email) -->
+    <div class="floating-cta">
+        <!-- WhatsApp -->
+        <a href="https://wa.me/263771308790" target="_blank" rel="noopener" class="cta-btn" aria-label="Chat on WhatsApp">
+            <svg viewBox="0 0 24 24" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 11.5a8.38 8.38 0 0 1-1.76 5.03L22 21l-4.74-1.24A8.38 8.38 0 0 1 12.28 20a8.5 8.5 0 0 1 0-17 8.5 8.5 0 0 1 8.72 8.5z"/>
+                <path d="M9.5 9.5h.01M12.5 9.5h.01M15.5 9.5h.01"/>
+            </svg>
+            <span class="cta-tooltip">WhatsApp</span>
+        </a>
+        <!-- Phone Call -->
+        <a href="tel:263771308790" class="cta-btn" aria-label="Call now">
+            <svg viewBox="0 0 24 24" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+            <span class="cta-tooltip">Call</span>
+        </a>
+        <!-- Email -->
+        <a href="mailto:gtmadzivire29@gmail.com" class="cta-btn" aria-label="Send email">
+            <svg viewBox="0 0 24 24" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="4" width="20" height="16" rx="2"/>
+                <path d="M22 4L12 13 2 4"/>
+            </svg>
+            <span class="cta-tooltip">Email</span>
+        </a>
+    </div>
 
     <!-- NAV -->
     <nav id="navbar">
@@ -1728,8 +1847,13 @@
                 <div><div class="contact-label">Venture</div><div class="contact-value">Decima Technologies — Zimbabwe Fintech</div></div>
             </div>
             <div class="contact-detail">
-                <div class="contact-icon">🌐</div>
-                <div><div class="contact-label">LinkedIn</div><div class="contact-value">Gareth Tendai Madzivire</div></div>
+                <div class="contact-icon">🔗</div>
+                <div>
+                    <div class="contact-label">LinkedIn</div>
+                    <div class="contact-value">
+                        <a href="https://www.linkedin.com/in/gareth-madzivire-acc0ntant2020" target="_blank" rel="noopener" class="contact-link">Gareth Tendai Madzivire ↗</a>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="contact-right gsap-reveal">
@@ -1798,9 +1922,8 @@
                 }
                 animateCursor();
 
-                // Hover states for cursor
                 const hoverTargets = document.querySelectorAll(
-                    'a, button, .btn-primary, .btn-outline, .magnetic, .venture-card, .expertise-cell, .edu-card, .timeline-item, .contact-detail, .about-value-item, .clients-table tbody tr, .hero-card'
+                    'a, button, .btn-primary, .btn-outline, .magnetic, .venture-card, .expertise-cell, .edu-card, .timeline-item, .contact-detail, .about-value-item, .clients-table tbody tr, .hero-card, .cta-btn'
                     );
                 hoverTargets.forEach(el => {
                     el.addEventListener('mouseenter', () => {
@@ -2105,7 +2228,6 @@
                     p.update();
                     p.draw();
                 });
-                // Draw connections
                 for (let i = 0; i < particles.length; i++) {
                     for (let j = i + 1; j < particles.length; j++) {
                         const dx = particles[i].x - particles[j].x;
@@ -2124,46 +2246,6 @@
                 requestAnimationFrame(animateParticles);
             }
             animateParticles();
-
-            // ── STAGGER ANIMATION FOR EXPERTISE CELLS ──
-            const expertiseCells = document.querySelectorAll('.expertise-cell');
-            expertiseCells.forEach((cell, i) => {
-                gsap.fromTo(cell, {
-                    opacity: 0,
-                    y: 30,
-                }, {
-                    opacity: 1,
-                    y: 0,
-                    duration: 0.6,
-                    ease: 'power2.out',
-                    scrollTrigger: {
-                        trigger: cell,
-                        start: 'top 90%',
-                        toggleActions: 'play none none none',
-                    },
-                    delay: i * 0.07,
-                });
-            });
-
-            // ── VENTURE CARDS STAGGER ──
-            const ventureCards = document.querySelectorAll('.venture-card');
-            ventureCards.forEach((card, i) => {
-                gsap.fromTo(card, {
-                    opacity: 0,
-                    y: 50,
-                }, {
-                    opacity: 1,
-                    y: 0,
-                    duration: 0.7,
-                    ease: 'power3.out',
-                    scrollTrigger: {
-                        trigger: card,
-                        start: 'top 88%',
-                        toggleActions: 'play none none none',
-                    },
-                    delay: i * 0.1,
-                });
-            });
 
             console.log('✅ Gareth Tendai Madzivire — Interactive Portfolio fully loaded.');
             console.log('✨ GSAP animations · Custom cursor · Particles · Typewriter · Counters · Parallax · Magnetic buttons · Scroll progress');
