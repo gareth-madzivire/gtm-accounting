@@ -16,12 +16,6 @@
             inherits: false;
         }
 
-        @property --reveal-progress {
-            syntax: '<number>';
-            initial-value: 0;
-            inherits: false;
-        }
-
         :root {
             --ink: #0e0e0c;
             --paper: #f5f2eb;
@@ -68,7 +62,6 @@
             text-wrap: pretty;
         }
 
-        /* ── SELECTION ── */
         ::selection {
             background: var(--teal);
             color: white;
@@ -456,6 +449,7 @@
             display: inline-block;
             transform: translateY(110%);
             opacity: 0;
+            transition: transform 1s var(--ease-out-expo), opacity 0.8s;
         }
         h1 .name-last {
             font-style: italic;
@@ -948,16 +942,16 @@
             z-index: 2;
         }
         .expertise-icon {
-            font-size: 1.8rem;
+            width: 2.2rem;
+            height: 2.2rem;
+            color: var(--teal);
             margin-bottom: 1.25rem;
             display: block;
-            transition: transform 0.5s var(--ease-elastic);
-            filter: grayscale(0.3);
-            transition: transform 0.5s var(--ease-elastic), filter 0.3s;
+            transition: transform 0.5s var(--ease-elastic), color 0.3s;
         }
         .expertise-cell:hover .expertise-icon {
-            transform: scale(1.25) rotate(-5deg);
-            filter: grayscale(0);
+            transform: scale(1.2) rotate(-5deg);
+            color: var(--gold);
         }
         .expertise-cell h3 {
             font-family: 'Syne', sans-serif;
@@ -1516,10 +1510,14 @@
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
-            font-size: 0.9rem;
             color: var(--teal);
             transition: transform 0.4s var(--ease-elastic), background 0.3s, color 0.3s;
             border-radius: 50%;
+        }
+        .contact-icon svg {
+            width: 1.1rem;
+            height: 1.1rem;
+            stroke-width: 1.8;
         }
         .contact-detail:hover .contact-icon {
             transform: scale(1.15) rotate(-5deg);
@@ -1547,10 +1545,22 @@
             background-repeat: no-repeat;
             transition: background-size 0.4s var(--ease-out-expo), color 0.3s;
             font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
         }
         .contact-link:hover {
             background-size: 100% 1.5px;
             color: var(--teal);
+        }
+        .contact-link svg {
+            width: 0.8rem;
+            height: 0.8rem;
+            stroke-width: 2;
+            transition: transform 0.3s;
+        }
+        .contact-link:hover svg {
+            transform: translate(2px, -2px);
         }
         .contact-right {
             display: flex;
@@ -1688,7 +1698,7 @@
             height: 22px;
             fill: none;
             stroke: white;
-            stroke-width: 2;
+            stroke-width: 1.8;
             stroke-linecap: round;
             stroke-linejoin: round;
             position: relative;
@@ -1938,20 +1948,20 @@
     <!-- FLOATING CTA BUTTONS -->
     <div class="floating-cta">
         <a href="https://wa.me/263771308790" target="_blank" rel="noopener" class="cta-btn" aria-label="Chat on WhatsApp">
-            <svg viewBox="0 0 24 24" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M21 11.5a8.38 8.38 0 0 1-1.76 5.03L22 21l-4.74-1.24A8.38 8.38 0 0 1 12.28 20a8.5 8.5 0 0 1 0-17 8.5 8.5 0 0 1 8.72 8.5z"/>
                 <path d="M9.5 9.5h.01M12.5 9.5h.01M15.5 9.5h.01"/>
             </svg>
             <span class="cta-tooltip">WhatsApp</span>
         </a>
         <a href="tel:263771308790" class="cta-btn" aria-label="Call now">
-            <svg viewBox="0 0 24 24" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
             </svg>
             <span class="cta-tooltip">Call</span>
         </a>
         <a href="mailto:gtmadzivire29@gmail.com" class="cta-btn" aria-label="Send email">
-            <svg viewBox="0 0 24 24" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <rect x="2" y="4" width="20" height="16" rx="2"/>
                 <path d="M22 4L12 13 2 4"/>
             </svg>
@@ -2066,7 +2076,12 @@
         <p class="section-intro">A full-spectrum financial practice covering compliance, advisory, and technology.</p>
         <div class="expertise-grid">
             <div class="expertise-cell velocity-skew">
-                <span class="expertise-icon">📊</span>
+                <svg class="expertise-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 3v18h18"/>
+                    <path d="M18 17V9"/>
+                    <path d="M13 17V5"/>
+                    <path d="M8 17v-3"/>
+                </svg>
                 <h3>IFRS Financial Reporting</h3>
                 <p>Preparation of IFRS-compliant financial statements, management accounts, and audit-ready reporting packages for multi-sector clients.</p>
                 <div class="expertise-tags">
@@ -2074,7 +2089,13 @@
                 </div>
             </div>
             <div class="expertise-cell velocity-skew">
-                <span class="expertise-icon">🏛️</span>
+                <svg class="expertise-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 21h18"/>
+                    <path d="M5 21V7l8-4 8 4v14"/>
+                    <path d="M9 21v-6h6v6"/>
+                    <path d="M10 9h.01"/>
+                    <path d="M14 9h.01"/>
+                </svg>
                 <h3>Zimbabwe Tax Compliance</h3>
                 <p>End-to-end ZIMRA compliance including VAT registration and filing, QPD submissions, self-assessment, income tax, and capital gains advisory.</p>
                 <div class="expertise-tags">
@@ -2082,7 +2103,10 @@
                 </div>
             </div>
             <div class="expertise-cell velocity-skew">
-                <span class="expertise-icon">🛡️</span>
+                <svg class="expertise-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    <path d="m9 12 2 2 4-4"/>
+                </svg>
                 <h3>NSSA &amp; NEC Compliance</h3>
                 <p>Statutory contribution management, employee registration, compliance calendar maintenance, and advisory on sector-specific NEC collective bargaining agreements.</p>
                 <div class="expertise-tags">
@@ -2090,7 +2114,15 @@
                 </div>
             </div>
             <div class="expertise-cell velocity-skew">
-                <span class="expertise-icon">⚙️</span>
+                <svg class="expertise-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="3" width="20" height="14" rx="2"/>
+                    <line x1="8" y1="21" x2="16" y2="21"/>
+                    <line x1="12" y1="17" x2="12" y2="21"/>
+                    <path d="M6 8h.01"/>
+                    <path d="M10 8h.01"/>
+                    <path d="M14 8h.01"/>
+                    <path d="M18 8h.01"/>
+                </svg>
                 <h3>Accounting Systems</h3>
                 <p>QuickBooks and Sage implementation, chart of accounts design, system migration, and ongoing bookkeeping advisory for SMEs across sectors.</p>
                 <div class="expertise-tags">
@@ -2098,7 +2130,13 @@
                 </div>
             </div>
             <div class="expertise-cell velocity-skew">
-                <span class="expertise-icon">🏗️</span>
+                <svg class="expertise-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="7" width="20" height="14" rx="2"/>
+                    <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
+                    <path d="M12 12v.01"/>
+                    <path d="M8 12v.01"/>
+                    <path d="M16 12v.01"/>
+                </svg>
                 <h3>Business Finance Structuring</h3>
                 <p>Financial oversight, startup setup, supplier negotiations, stakeholder management, and business operations coordination for new ventures.</p>
                 <div class="expertise-tags">
@@ -2106,7 +2144,13 @@
                 </div>
             </div>
             <div class="expertise-cell velocity-skew">
-                <span class="expertise-icon">📈</span>
+                <svg class="expertise-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                    <polyline points="17 6 23 6 23 12"/>
+                    <path d="M12 22v-4"/>
+                    <path d="M8 16v-2"/>
+                    <path d="M16 14v-4"/>
+                </svg>
                 <h3>Algorithmic Trading</h3>
                 <p>Development of MT5 algorithmic trading bots incorporating AMD methodology, Steve Mauro's Market Maker Method, RSI, Moving Averages, and Bollinger Bands.</p>
                 <div class="expertise-tags">
@@ -2311,23 +2355,51 @@
             </h2>
             <p class="section-intro">Available for new client engagements, advisory mandates, and partnerships in fintech and financial services.</p>
             <div class="contact-detail">
-                <div class="contact-icon">📍</div>
+                <div class="contact-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                        <circle cx="12" cy="10" r="3"/>
+                    </svg>
+                </div>
                 <div><div class="contact-label">Location</div><div class="contact-value">Bulawayo, Zimbabwe</div></div>
             </div>
             <div class="contact-detail">
-                <div class="contact-icon">🎓</div>
+                <div class="contact-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                        <path d="M6 12v5c0 2 3 4 6 4s6-2 6-4v-5"/>
+                    </svg>
+                </div>
                 <div><div class="contact-label">Qualifications</div><div class="contact-value">BCom Honours Accounting · QuickBooks ProAdvisor · Sage Advisor</div></div>
             </div>
             <div class="contact-detail">
-                <div class="contact-icon">🏢</div>
+                <div class="contact-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="4" y="2" width="16" height="20" rx="2"/>
+                        <path d="M9 22v-4h6v4"/>
+                        <path d="M8 6h.01"/><path d="M16 6h.01"/>
+                    </svg>
+                </div>
                 <div><div class="contact-label">Venture</div><div class="contact-value">Decima Technologies — Zimbabwe Fintech</div></div>
             </div>
             <div class="contact-detail">
-                <div class="contact-icon">🔗</div>
+                <div class="contact-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                        <rect x="2" y="9" width="4" height="12"/>
+                        <circle cx="4" cy="4" r="2"/>
+                    </svg>
+                </div>
                 <div>
                     <div class="contact-label">LinkedIn</div>
                     <div class="contact-value">
-                        <a href="https://www.linkedin.com/in/gareth-madzivire-acc0ntant2020" target="_blank" rel="noopener" class="contact-link">Gareth Tendai Madzivire ↗</a>
+                        <a href="https://www.linkedin.com/in/gareth-madzivire-acc0ntant2020" target="_blank" rel="noopener" class="contact-link">
+                            Gareth Tendai Madzivire
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M7 17L17 7"/>
+                                <path d="M7 7h10v10"/>
+                            </svg>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -2373,7 +2445,6 @@
             const preloaderExit = document.getElementById('preloader-exit');
             const preloaderChars = document.querySelectorAll('.preloader-logo .char');
 
-            // Animate preloader characters
             gsap.to(preloaderChars, {
                 y: 0,
                 opacity: 1,
@@ -2521,7 +2592,6 @@
                 const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
                 scrollProgress.style.width = progress + '%';
                 
-                // Calculate velocity
                 scrollVelocity = scrollTop - lastScrollTop;
                 lastScrollTop = scrollTop;
             }, { passive: true });
@@ -2679,48 +2749,41 @@
 
                 const heroTl = gsap.timeline({ delay: 0.3 });
                 
-                // Eyebrow
                 heroTl.fromTo('#hero-eyebrow', 
                     { opacity: 0, y: 20 }, 
                     { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }
                 );
 
-                // Name first
                 heroTl.fromTo('#name-first',
                     { opacity: 0, y: 60, rotateX: 15 },
                     { opacity: 1, y: 0, rotateX: 0, duration: 1.2, ease: 'power3.out' },
                     '-=0.4'
                 );
 
-                // Name last
                 heroTl.fromTo('#name-last',
                     { opacity: 0, y: 60, rotateX: 15 },
                     { opacity: 1, y: 0, rotateX: 0, duration: 1.2, ease: 'power3.out' },
                     '-=0.9'
                 );
 
-                // Tagline
                 heroTl.fromTo('#typewriter-target',
                     { opacity: 0, y: 20 },
                     { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' },
                     '-=0.6'
                 );
 
-                // CTAs
                 heroTl.fromTo('#hero-cta',
                     { opacity: 0, y: 20 },
                     { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' },
                     '-=0.4'
                 );
 
-                // Stats
                 heroTl.fromTo('.hero-stat-item',
                     { opacity: 0, y: 30 },
                     { opacity: 1, y: 0, duration: 0.8, stagger: 0.1, ease: 'power3.out' },
                     '-=0.4'
                 );
 
-                // Hero card
                 heroTl.to('#hero-card',
                     { opacity: 1, y: 0, rotateX: 0, duration: 1.2, ease: 'power3.out' },
                     '-=1'
@@ -2729,7 +2792,6 @@
 
             // ── SCROLL REVEAL SYSTEM ──
             function initScrollReveals() {
-                // Section labels
                 document.querySelectorAll('.section-label').forEach(el => {
                     ScrollTrigger.create({
                         trigger: el,
@@ -2739,7 +2801,6 @@
                     });
                 });
 
-                // H2 lines
                 document.querySelectorAll('h2 .line').forEach((el, i) => {
                     ScrollTrigger.create({
                         trigger: el,
@@ -2752,7 +2813,6 @@
                     });
                 });
 
-                // Section intros
                 document.querySelectorAll('.section-intro').forEach(el => {
                     ScrollTrigger.create({
                         trigger: el,
@@ -2762,7 +2822,6 @@
                     });
                 });
 
-                // About paragraphs
                 const aboutParagraphs = document.querySelectorAll('#about p');
                 aboutParagraphs.forEach((p, i) => {
                     ScrollTrigger.create({
@@ -2776,7 +2835,6 @@
                     });
                 });
 
-                // About value items
                 document.querySelectorAll('.about-value-item').forEach((el, i) => {
                     ScrollTrigger.create({
                         trigger: el,
@@ -2789,7 +2847,6 @@
                     });
                 });
 
-                // Expertise cells
                 gsap.utils.toArray('.expertise-cell').forEach((el, i) => {
                     gsap.fromTo(el, 
                         { opacity: 0, y: 50 },
@@ -2808,7 +2865,6 @@
                     );
                 });
 
-                // Venture cards
                 gsap.utils.toArray('.venture-card').forEach((el, i) => {
                     gsap.fromTo(el,
                         { opacity: 0, y: 60, scale: 0.95 },
@@ -2828,7 +2884,6 @@
                     );
                 });
 
-                // Client table rows
                 gsap.utils.toArray('.clients-table tbody tr').forEach((el, i) => {
                     gsap.fromTo(el,
                         { opacity: 0, x: -30 },
@@ -2847,7 +2902,6 @@
                     );
                 });
 
-                // Timeline items
                 document.querySelectorAll('.timeline-item').forEach((el, i) => {
                     ScrollTrigger.create({
                         trigger: el,
@@ -2860,7 +2914,6 @@
                     });
                 });
 
-                // Education cards
                 document.querySelectorAll('.edu-card').forEach((el, i) => {
                     ScrollTrigger.create({
                         trigger: el,
@@ -2873,7 +2926,6 @@
                     });
                 });
 
-                // Contact details
                 gsap.utils.toArray('.contact-detail').forEach((el, i) => {
                     gsap.fromTo(el,
                         { opacity: 0, x: -20 },
@@ -2969,7 +3021,6 @@
                     this.x += this.speedX;
                     this.y += this.speedY;
                     
-                    // Mouse interaction
                     if (!isMobile) {
                         const dx = mouseX - this.x;
                         const dy = mouseY - this.y;
@@ -3004,7 +3055,6 @@
                     p.draw();
                 });
                 
-                // Draw connections
                 for (let i = 0; i < particles.length; i++) {
                     for (let j = i + 1; j < particles.length; j++) {
                         const dx = particles[i].x - particles[j].x;
@@ -3024,10 +3074,8 @@
             }
             animateParticles();
 
-            // ── SCROLL COUNTER TRIGGER ──
             window.addEventListener('scroll', animateCounters, { passive: true });
 
-            // ── FOOTER REVEAL EFFECT ──
             gsap.fromTo('footer',
                 { opacity: 0, y: 20 },
                 {
@@ -3044,7 +3092,7 @@
             );
 
             console.log('✅ Gareth Tendai Madzivire — Ultra-Modern Interactive Portfolio loaded.');
-            console.log('🎨 Features: GSAP ScrollTrigger · Custom Cursor · Magnetic Buttons · 3D Tilt · Velocity Skew · Particle Network · Staggered Reveals · Parallax · Active Nav');
+            console.log('🎨 Professional SVG Icons · GSAP ScrollTrigger · Custom Cursor · Magnetic Buttons · 3D Tilt · Velocity Skew · Particle Network · Staggered Reveals · Parallax · Active Nav');
         });
     </script>
 </body>
